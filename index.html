@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading & Play Time Tracker</title>
+    <!-- Add Minecraft font -->
+    <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <style>
+        /* Update the body background */
+        body {
+            font-family: 'Minecraft', sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            background: linear-gradient(
+                to bottom,
+                #64B5F6 0%, /* Light blue sky */
+                #90CAF9 100%  /* Slightly lighter blue for depth */
+            );
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Update the cloud styles to be more Minecraft-like */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            width: 200px;
+            height: 60px;
+            background: white;
+            top: 50px;
+            animation: moveCloud 30s linear infinite;
+            /* Remove border-radius for square clouds */
+            /* Add pixelated edges with box-shadow */
+            box-shadow: 
+                40px 0 0 0 white,
+                -40px 0 0 0 white,
+                0 -20px 0 0 white,
+                40px -20px 0 0 white,
+                -40px -20px 0 0 white;
+            opacity: 0.8;
+        }
+
+        /* Add more clouds at different positions */
+        body::before {
+            left: -300px;
+            animation-delay: 0s;
+            top: 80px;
+        }
+
+        body::after {
+            left: -150px;
+            top: 200px;
+            animation-delay: 15s;
+            /* Make second cloud slightly different */
+            width: 160px;
+            box-shadow: 
+                30px 0 0 0 white,
+                -30px 0 0 0 white,
+                0 -20px 0 0 white,
+                30px -20px 0 0 white,
+                -30px -20px 0 0 white;
+        }
+
+        /* Add a third cloud using a new pseudo-element */
+        .timer-container:first-of-type::before {
+            content: '';
+            position: fixed;
+            width: 180px;
+            height: 60px;
+            background: white;
+            top: 150px;
+            left: -200px;
+            animation: moveCloud 35s linear infinite;
+            animation-delay: 7s;
+            box-shadow: 
+                35px 0 0 0 white,
+                -35px 0 0 0 white,
+                0 -20px 0 0 white,
+                35px -20px 0 0 white,
+                -35px -20px 0 0 white;
+            opacity: 0.8;
+            z-index: -1;
+        }
+
+        @keyframes moveCloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 400px)); }
+        }
+
+        .timer-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 4px solid #404040;
+            background-color: rgba(0, 0, 0, 0.8); /* Make containers more transparent */
+            border-radius: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .time-display {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #55FF55;
+            text-shadow: 2px 2px #000000;
+        }
+        h1, h2 {
+            text-shadow: 2px 2px #000000;
+            color: #FFFFFF;
+        }
+        button {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: 3px solid #2C1B2E;
+            background-color: #7B2FBE;
+            color: white;
+            text-shadow: 2px 2px #000000;
+            box-shadow: inset -2px -4px #2C1B2E;
+            border-radius: 0;
+            transition: all 0.1s;
+        }
+        button:hover {
+            background-color: #8B44CF;
+        }
+        button:active {
+            box-shadow: inset 2px 4px #2C1B2E;
+        }
+        button:disabled {
+            background-color: #3F2147;
+            color: #888888;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        #startReading {
+            background-color: #B026FF;
+            border-color: #4C0F6B;
+            box-shadow: inset -2px -4px #4C0F6B;
+        }
+        #startReading:hover {
+            background-color: #C44DFF;
+        }
+        #stopReading {
+            background-color: #8B00FF;
+            border-color: #3B0B6B;
+            box-shadow: inset -2px -4px #3B0B6B;
+        }
+        #stopReading:hover {
+            background-color: #9D33FF;
+        }
+        #startPlaying {
+            background-color: #FF6600;
+            border-color: #993D00;
+            box-shadow: inset -2px -4px #993D00;
+        }
+        #startPlaying:hover {
+            background-color: #FF8533;
+        }
+        #startPlaying:disabled {
+            background-color: #662900;
+            color: #888888;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        #stopPlaying {
+            background-color: #FF4400;
+            border-color: #992900;
+            box-shadow: inset -2px -4px #992900;
+        }
+        #stopPlaying:hover {
+            background-color: #FF6633;
+        }
+        #stopPlaying:disabled {
+            background-color: #662900;
+            color: #888888;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        /* Update the time display colors for play time */
+        #playTime {
+            color: #FFA200; /* Lava-like orange color */
+        }
+        /* Style the play time container differently */
+        .timer-container:nth-child(3) {
+            border: 4px solid #802200;
+            background-color: rgba(65, 20, 0, 0.9);
+            box-shadow: inset 0 0 20px rgba(255, 87, 34, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>⛏️ Reading & Minecraft Time Tracker ⛏️</h1>
+    
+    <div class="timer-container">
+        <h2>📚 Reading Time</h2>
+        <div id="readingTime" class="time-display">00:00</div>
+        <button id="startReading">Start Reading</button>
+        <button id="stopReading" disabled>Stop Reading</button>
+    </div>
+
+    <div class="timer-container">
+        <h2>🎮 Minecraft Play Time Earned</h2>
+        <div id="playTime" class="time-display">00:00</div>
+        <button id="startPlaying" disabled>Start Playing</button>
+        <button id="stopPlaying" disabled>Stop Playing</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
