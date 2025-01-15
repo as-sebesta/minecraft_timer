@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reading & Play Time Tracker</title>
+    <!-- Try a different timer favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='black' stroke-width='8' fill='white'/><path d='M50 20 L50 50 L70 70' stroke='black' stroke-width='8' stroke-linecap='round' fill='none'/></svg>" />
     <!-- Add Minecraft font -->
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <style>
@@ -38,41 +40,95 @@
         .cloud::after {
             content: '';
             position: absolute;
-            width: 40px;
-            height: 20px;
             background: rgba(255, 255, 255, 0.8);
             animation: moveCloud linear infinite;
         }
 
-        /* Create multiple cloud elements with different sizes and positions */
-        .cloud::before { top: 20%; animation-duration: 60s; box-shadow: 
-            120px -10px 0 rgba(255, 255, 255, 0.8),
-            160px -10px 0 rgba(255, 255, 255, 0.8),
-            200px -10px 0 rgba(255, 255, 255, 0.8),
-            120px 10px 0 rgba(255, 255, 255, 0.8),
-            160px 10px 0 rgba(255, 255, 255, 0.8),
-            200px 10px 0 rgba(255, 255, 255, 0.8),
-            400px 0px 0 rgba(255, 255, 255, 0.8),
-            440px 0px 0 rgba(255, 255, 255, 0.8),
-            480px 0px 0 rgba(255, 255, 255, 0.8),
-            400px 20px 0 rgba(255, 255, 255, 0.8),
-            440px 20px 0 rgba(255, 255, 255, 0.8),
-            480px 20px 0 rgba(255, 255, 255, 0.8);
+        /* First cloud layer - spread out vertically */
+        .cloud::before { 
+            top: 5%; /* Start higher */
+            width: 40px;
+            height: 40px;
+            animation-duration: 60s; 
+            box-shadow: 
+                /* First tall cloud - higher up */
+                0 0 0 rgba(255, 255, 255, 0.8),
+                0 -40px 0 rgba(255, 255, 255, 0.8),
+                40px 0 0 rgba(255, 255, 255, 0.8),
+                40px -40px 0 rgba(255, 255, 255, 0.8),
+                80px 0 0 rgba(255, 255, 255, 0.8),
+                20px -80px 0 rgba(255, 255, 255, 0.8),
+                60px -80px 0 rgba(255, 255, 255, 0.8),
+                
+                /* Second cloud formation - middle height */
+                300px 200px 0 rgba(255, 255, 255, 0.8),
+                340px 200px 0 rgba(255, 255, 255, 0.8),
+                380px 200px 0 rgba(255, 255, 255, 0.8),
+                320px 160px 0 rgba(255, 255, 255, 0.8),
+                360px 160px 0 rgba(255, 255, 255, 0.8),
+                340px 120px 0 rgba(255, 255, 255, 0.8);
         }
 
-        .cloud::after { top: 50%; animation-duration: 75s; animation-delay: -30s; box-shadow:
-            320px -15px 0 rgba(255, 255, 255, 0.8),
-            360px -15px 0 rgba(255, 255, 255, 0.8),
-            400px -15px 0 rgba(255, 255, 255, 0.8),
-            320px 5px 0 rgba(255, 255, 255, 0.8),
-            360px 5px 0 rgba(255, 255, 255, 0.8),
-            400px 5px 0 rgba(255, 255, 255, 0.8),
-            600px 10px 0 rgba(255, 255, 255, 0.8),
-            640px 10px 0 rgba(255, 255, 255, 0.8),
-            680px 10px 0 rgba(255, 255, 255, 0.8),
-            600px 30px 0 rgba(255, 255, 255, 0.8),
-            640px 30px 0 rgba(255, 255, 255, 0.8),
-            680px 30px 0 rgba(255, 255, 255, 0.8);
+        /* Second cloud layer - lower formations */
+        .cloud::after { 
+            top: 70%; /* Move much lower */
+            width: 40px;
+            height: 40px;
+            animation-duration: 75s; 
+            animation-delay: -30s; 
+            box-shadow:
+                /* Pyramid style cloud - near bottom */
+                500px 0 0 rgba(255, 255, 255, 0.8),
+                540px 0 0 rgba(255, 255, 255, 0.8),
+                580px 0 0 rgba(255, 255, 255, 0.8),
+                520px -40px 0 rgba(255, 255, 255, 0.8),
+                560px -40px 0 rgba(255, 255, 255, 0.8),
+                540px -80px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Third cloud layer - middle area */
+        .cloud-layer2::before {
+            content: '';
+            position: absolute;
+            top: 40%; /* Center vertically */
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            animation: moveCloud 90s linear infinite;
+            animation-delay: -15s;
+            box-shadow:
+                /* Tall stack in middle */
+                200px 0 0 rgba(255, 255, 255, 0.8),
+                200px -40px 0 rgba(255, 255, 255, 0.8),
+                200px -80px 0 rgba(255, 255, 255, 0.8),
+                
+                /* Wide formation higher up */
+                400px -200px 0 rgba(255, 255, 255, 0.8),
+                440px -200px 0 rgba(255, 255, 255, 0.8),
+                480px -200px 0 rgba(255, 255, 255, 0.8),
+                420px -240px 0 rgba(255, 255, 255, 0.8),
+                460px -240px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Fourth cloud layer - scattered positions */
+        .cloud-layer2::after {
+            content: '';
+            position: absolute;
+            top: 20%; /* Upper middle */
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            animation: moveCloud 120s linear infinite;
+            animation-delay: -45s;
+            box-shadow:
+                /* Small pyramid higher */
+                600px 100px 0 rgba(255, 255, 255, 0.8),
+                640px 100px 0 rgba(255, 255, 255, 0.8),
+                620px 60px 0 rgba(255, 255, 255, 0.8),
+                
+                /* Small stack lower */
+                800px 300px 0 rgba(255, 255, 255, 0.8),
+                800px 260px 0 rgba(255, 255, 255, 0.8);
         }
 
         @keyframes moveCloud {
@@ -89,24 +145,6 @@
             bottom: 0;
             pointer-events: none;
             z-index: -1;
-        }
-
-        .cloud-layer2::before {
-            content: '';
-            position: absolute;
-            top: 35%;
-            width: 40px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            animation: moveCloud 90s linear infinite;
-            animation-delay: -15s;
-            box-shadow:
-                200px -5px 0 rgba(255, 255, 255, 0.8),
-                240px -5px 0 rgba(255, 255, 255, 0.8),
-                280px -5px 0 rgba(255, 255, 255, 0.8),
-                200px 15px 0 rgba(255, 255, 255, 0.8),
-                240px 15px 0 rgba(255, 255, 255, 0.8),
-                280px 15px 0 rgba(255, 255, 255, 0.8);
         }
 
         .timer-container {
@@ -207,10 +245,48 @@
             background-color: rgba(65, 20, 0, 0.9);
             box-shadow: inset 0 0 20px rgba(255, 87, 34, 0.3);
         }
+        /* Add Minecraft green color for title */
+        h1 {
+            text-shadow: 2px 2px #000000;
+            color: #54DB3B; /* Minecraft green color */
+            text-align: center; /* Ensure centered */
+            margin: 20px 0;
+        }
+        /* Style for Minecraft blocks in title */
+        .minecraft-block {
+            display: inline-block;
+            font-family: 'Minecraft', sans-serif;
+            padding: 2px 6px;
+            margin: 0 5px;
+            font-size: 24px;
+            text-shadow: 2px 2px #000000;
+            border: 2px solid #000000;
+        }
+
+        .tnt-block {
+            background-color: #FF0000;
+            color: #FFFFFF;
+        }
+
+        .dirt-block {
+            background-color: #8B4513;
+            color: #654321;
+            border-color: #3D2314;
+        }
+
+        /* Update title spacing */
+        h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 2px 2px #000000;
+            color: #54DB3B;
+        }
     </style>
 </head>
 <body>
-    <h1>⛏️ Reading & Minecraft Time Tracker ⛏️</h1>
+    <h1>Reading & Minecraft Time Tracker</h1>
     
     <div class="timer-container">
         <h2>📚 Reading Time</h2>
