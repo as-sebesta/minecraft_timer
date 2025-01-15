@@ -1,4 +1,5 @@
 # Minecraft Reading Timer
+https://as-sebesta.github.io/minecraft_timer/ 
 
 A web-based timer that rewards reading time with Minecraft play time. For every 1 minute of reading, you earn 5 minutes of Minecraft play time.
 
