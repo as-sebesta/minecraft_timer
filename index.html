@@ -2,25 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Reading & Play Time Tracker</title>
     <!-- Try a different timer favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='black' stroke-width='8' fill='white'/><path d='M50 20 L50 50 L70 70' stroke='black' stroke-width='8' stroke-linecap='round' fill='none'/></svg>" />
     <!-- Add Minecraft font -->
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
     <style>
-        /* Update sky color to match Minecraft's lighter blue */
+        /* Update responsive styles */
         body {
             font-family: 'Minecraft', sans-serif;
             max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
+            margin: 20px auto;
+            padding: 10px;
             text-align: center;
             color: white;
-            background: #87CEEB; /* Lighter Minecraft sky blue */
+            background: #87CEEB;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+        }
+
+        /* Make title responsive */
+        h1 {
+            font-size: clamp(24px, 5vw, 32px);
+            padding: 0 10px;
+            margin: 15px 0;
+            text-shadow: 2px 2px #000000;
+            color: #FFFFFF;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Make containers more mobile-friendly */
+        .timer-container {
+            margin: 15px 10px;
+            padding: 15px;
+            border: 4px solid #404040;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        /* Adjust time display for mobile */
+        .time-display {
+            font-size: clamp(36px, 8vw, 48px);
+            margin: 15px 0;
+        }
+
+        /* Make buttons more touch-friendly */
+        button {
+            font-size: clamp(14px, 4vw, 16px);
+            padding: 12px 24px;
+            margin: 8px;
+            min-width: 160px;
+            touch-action: manipulation; /* Better touch handling */
+        }
+
+        /* Add media queries for smaller screens */
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            h2 {
+                font-size: 20px;
+                margin: 10px 0;
+            }
+
+            .timer-container {
+                margin: 10px 5px;
+                padding: 10px;
+            }
+
+            button {
+                width: 85%;
+                max-width: 300px;
+                margin: 5px auto;
+                display: block;
+            }
+        }
+
+        /* Add viewport-height based media query for shorter screens */
+        @media (max-height: 600px) {
+            .timer-container {
+                margin: 10px 5px;
+                padding: 10px;
+            }
+
+            .time-display {
+                margin: 10px 0;
+            }
+
+            h1, h2 {
+                margin: 8px 0;
+            }
+        }
+
+        /* Prevent text selection on mobile */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         /* Create multiple cloud layers using pseudo-elements */
