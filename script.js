@@ -28,9 +28,9 @@ function updateReadingTime() {
         readingSeconds = elapsedSeconds;
         readingTimeDisplay.textContent = formatTime(readingSeconds);
         
-        // Add 5 minutes of play time for every 1 minute of reading
+        // Add 3 minutes of play time for every 1 minute of reading
         const previousPlayTime = playSeconds;
-        playSeconds = Math.floor(readingSeconds / 60) * 300; // 5 minutes = 300 seconds
+        playSeconds = Math.floor(readingSeconds / 60) * 180; // 3 minutes = 180 seconds
         if (playSeconds !== previousPlayTime) {
             playTimeDisplay.textContent = formatTime(playSeconds);
         }
