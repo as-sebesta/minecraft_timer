@@ -318,6 +318,57 @@
             color: #654321;
             border-color: #3D2314;
         }
+
+        .tnt-reset {
+            width: 64px;  /* Make it a perfect square */
+            height: 64px;
+            margin: 20px auto;
+            display: block;
+            cursor: pointer;
+            border: 2px solid #000000;
+            padding: 0;
+            background: none;
+            position: relative;
+            font-family: 'Minecraft', sans-serif;
+            overflow: hidden;
+        }
+
+        .red-section {
+            height: 33.33%;
+            width: 100%;
+            background: linear-gradient(to right,
+                #FF3B3B 0%,
+                #FF3B3B 25%,
+                #FF2222 25%,
+                #FF2222 50%,
+                #FF1111 50%,
+                #FF1111 75%,
+                #FF0000 75%,
+                #FF0000 100%
+            );
+        }
+
+        .text-section {
+            height: 33.33%;
+            width: 100%;
+            background: #E6E6E6;
+            color: #000000;
+            font-weight: bold;
+            font-size: 16px;  /* Increased from 12px */
+            line-height: 21px;
+            text-align: center;
+            border-top: 1px solid #FFFFFF;
+            border-bottom: 1px solid #999999;
+            text-shadow: 1px 1px #FFFFFF;
+        }
+
+        .tnt-reset:hover {
+            transform: scale(1.05);
+        }
+
+        .tnt-reset:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -336,6 +387,12 @@
         <button id="startPlaying" disabled>Start Playing</button>
         <button id="stopPlaying" disabled>Stop Playing</button>
     </div>
+
+    <button id="resetButton" class="tnt-reset">
+        <div class="red-section"></div>
+        <div class="text-section">RESET</div>
+        <div class="red-section"></div>
+    </button>
 
     <script src="script.js"></script>
 

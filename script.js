@@ -1,7 +1,7 @@
-let readingStartTime = 0;
-let playStartTime = 0;
 let readingSeconds = 0;
 let playSeconds = 0;
+let readingStartTime = 0;
+let playStartTime = 0;
 let isReading = false;
 let isPlaying = false;
 
@@ -25,17 +25,17 @@ function updateReadingTime() {
     if (isReading) {
         const currentTime = Date.now();
         const elapsedSeconds = (currentTime - readingStartTime) / 1000;
-        readingSeconds = elapsedSeconds;
-        readingTimeDisplay.textContent = formatTime(readingSeconds);
+        const totalSeconds = readingSeconds + elapsedSeconds;
+        readingTimeDisplay.textContent = formatTime(totalSeconds);
         
         // Add 3 minutes of play time for every 1 minute of reading
         const previousPlayTime = playSeconds;
-        playSeconds = Math.floor(readingSeconds / 60) * 180; // 3 minutes = 180 seconds
-        if (playSeconds !== previousPlayTime) {
+        const newPlayTime = Math.floor(totalSeconds / 60) * 180; // 3 minutes = 180 seconds
+        if (newPlayTime !== previousPlayTime) {
+            playSeconds = newPlayTime;
             playTimeDisplay.textContent = formatTime(playSeconds);
         }
         
-        // Use requestAnimationFrame for smooth updates
         requestAnimationFrame(updateReadingTime);
     }
 }
@@ -70,10 +70,31 @@ startReadingBtn.addEventListener('click', () => {
 // Stop reading timer
 stopReadingBtn.addEventListener('click', () => {
     isReading = false;
+    const currentTime = Date.now();
+    const elapsedSeconds = (currentTime - readingStartTime) / 1000;
+    readingSeconds += elapsedSeconds; // Add elapsed time to total
     startReadingBtn.disabled = false;
     stopReadingBtn.disabled = true;
     startPlayingBtn.disabled = false;
 });
+
+// Reset all timers
+function resetTimers() {
+    isReading = false;
+    isPlaying = false;
+    readingSeconds = 0;
+    playSeconds = 0;
+    readingTimeDisplay.textContent = formatTime(0);
+    playTimeDisplay.textContent = formatTime(0);
+    startReadingBtn.disabled = false;
+    stopReadingBtn.disabled = true;
+    startPlayingBtn.disabled = true;
+    stopPlayingBtn.disabled = true;
+}
+
+// Add reset button functionality
+const resetBtn = document.getElementById('resetButton');
+resetBtn.addEventListener('click', resetTimers);
 
 // Start playing timer
 startPlayingBtn.addEventListener('click', () => {
