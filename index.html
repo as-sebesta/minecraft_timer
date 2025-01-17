@@ -126,95 +126,65 @@
         .cloud::after {
             content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.8);
+            background: #FFFFFF;
             animation: moveCloud linear infinite;
         }
 
-        /* First cloud layer - spread out vertically */
+        /* First cloud layer - pixelated style */
         .cloud::before { 
-            top: 5%; /* Start higher */
+            top: 10%;
             width: 40px;
             height: 40px;
             animation-duration: 60s; 
             box-shadow: 
-                /* First tall cloud - higher up */
-                0 0 0 rgba(255, 255, 255, 0.8),
-                0 -40px 0 rgba(255, 255, 255, 0.8),
-                40px 0 0 rgba(255, 255, 255, 0.8),
-                40px -40px 0 rgba(255, 255, 255, 0.8),
-                80px 0 0 rgba(255, 255, 255, 0.8),
-                20px -80px 0 rgba(255, 255, 255, 0.8),
-                60px -80px 0 rgba(255, 255, 255, 0.8),
+                /* Base layer */
+                40px 0 0 rgba(255, 255, 255, 1),
+                80px 0 0 rgba(255, 255, 255, 1),
+                /* Middle layer with slight shadow */
+                0px -40px 0 rgba(255, 255, 255, 0.95),
+                40px -40px 0 rgba(255, 255, 255, 0.95),
+                /* Top layer with more shadow */
+                40px -80px 0 rgba(255, 255, 255, 0.9),
                 
-                /* Second cloud formation - middle height */
-                300px 200px 0 rgba(255, 255, 255, 0.8),
-                340px 200px 0 rgba(255, 255, 255, 0.8),
-                380px 200px 0 rgba(255, 255, 255, 0.8),
-                320px 160px 0 rgba(255, 255, 255, 0.8),
-                360px 160px 0 rgba(255, 255, 255, 0.8),
-                340px 120px 0 rgba(255, 255, 255, 0.8);
+                /* Second cloud formation */
+                400px 0 0 rgba(255, 255, 255, 1),
+                440px 0 0 rgba(255, 255, 255, 1),
+                400px -40px 0 rgba(255, 255, 255, 0.95);
         }
 
-        /* Second cloud layer - lower formations */
+        /* Second cloud layer */
         .cloud::after { 
-            top: 70%; /* Move much lower */
+            top: 30%;
             width: 40px;
             height: 40px;
-            animation-duration: 75s; 
-            animation-delay: -30s; 
+            animation-duration: 75s;
+            animation-delay: -30s;
             box-shadow:
-                /* Pyramid style cloud - near bottom */
-                500px 0 0 rgba(255, 255, 255, 0.8),
-                540px 0 0 rgba(255, 255, 255, 0.8),
-                580px 0 0 rgba(255, 255, 255, 0.8),
-                520px -40px 0 rgba(255, 255, 255, 0.8),
-                560px -40px 0 rgba(255, 255, 255, 0.8),
-                540px -80px 0 rgba(255, 255, 255, 0.8);
+                /* Base layer */
+                200px 0 0 rgba(255, 255, 255, 1),
+                240px 0 0 rgba(255, 255, 255, 1),
+                280px 0 0 rgba(255, 255, 255, 1),
+                /* Top layer */
+                240px -40px 0 rgba(255, 255, 255, 0.95);
         }
 
-        /* Third cloud layer - middle area */
+        /* Third cloud layer */
         .cloud-layer2::before {
             content: '';
             position: absolute;
-            top: 40%; /* Center vertically */
+            top: 60%;
             width: 40px;
             height: 40px;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 1);
             animation: moveCloud 90s linear infinite;
             animation-delay: -15s;
             box-shadow:
-                /* Tall stack in middle */
-                200px 0 0 rgba(255, 255, 255, 0.8),
-                200px -40px 0 rgba(255, 255, 255, 0.8),
-                200px -80px 0 rgba(255, 255, 255, 0.8),
-                
-                /* Wide formation higher up */
-                400px -200px 0 rgba(255, 255, 255, 0.8),
-                440px -200px 0 rgba(255, 255, 255, 0.8),
-                480px -200px 0 rgba(255, 255, 255, 0.8),
-                420px -240px 0 rgba(255, 255, 255, 0.8),
-                460px -240px 0 rgba(255, 255, 255, 0.8);
-        }
-
-        /* Fourth cloud layer - scattered positions */
-        .cloud-layer2::after {
-            content: '';
-            position: absolute;
-            top: 20%; /* Upper middle */
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.8);
-            animation: moveCloud 120s linear infinite;
-            animation-delay: -45s;
-            box-shadow:
-                /* Small pyramid higher */
-                600px 100px 0 rgba(255, 255, 255, 0.8),
-                640px 100px 0 rgba(255, 255, 255, 0.8),
-                620px 60px 0 rgba(255, 255, 255, 0.8),
-                
-                /* Small stack lower */
-                800px 300px 0 rgba(255, 255, 255, 0.8),
-                800px 260px 0 rgba(255, 255, 255, 0.8);
+                /* Base layer */
+                40px 0 0 rgba(255, 255, 255, 1),
+                80px 0 0 rgba(255, 255, 255, 1),
+                120px 0 0 rgba(255, 255, 255, 1),
+                /* Top layers */
+                80px -40px 0 rgba(255, 255, 255, 0.95);
         }
 
         @keyframes moveCloud {
